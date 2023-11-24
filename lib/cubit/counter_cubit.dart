@@ -10,6 +10,6 @@ class CounterCubit extends Cubit<CounterState> {
   }
 
   void decrement() {
-    emit(CounterState(value: state.value - 1));
+    emit(CounterState(value: state.value >= 1 ? state.value - 1 : 0));
   }
 }
