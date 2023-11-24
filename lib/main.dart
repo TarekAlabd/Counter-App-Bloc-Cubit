@@ -44,8 +44,23 @@ class MyHomePage extends StatelessWidget {
             const Text(
               'You have pushed the button this many times:',
             ),
-            BlocBuilder<CounterCubit, CounterState>(
+            BlocConsumer<CounterCubit, CounterState>(
               bloc: BlocProvider.of<CounterCubit>(context),
+              listener: (context, state) {
+                SnackBar snackBar;
+                if (state.hasIncremented) {
+                  // Snackbar with incremented
+                  snackBar = const SnackBar(
+                    content: Text('Incremented'),
+                  );
+                } else {
+                  // Snackbar with decremented
+                  snackBar = const SnackBar(
+                    content: Text('Decremented'),
+                  );
+                }
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
               builder: (context, state) {
                 return Text(
                   '${state.value}',
